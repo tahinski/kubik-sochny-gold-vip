@@ -3,187 +3,349 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKHINSKY JUICY CUBE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAKHINSKY JUICY CUBE GOLD VIP</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#08090d;color:white;font-family:Arial;text-align:center}
-header{padding:22px 8px}
-h1{color:#e7bd55;letter-spacing:2px;font-size:25px}
-h2{font-size:16px;color:#aaa}
-.panel{background:#17191e;border:1px solid #9e792e;border-radius:14px;padding:15px;margin:15px auto;width:90%;max-width:390px}
-.coins{font-size:23px;color:#f4cf65}
-select{padding:10px;border-radius:8px;font-size:17px}
-.reels{display:flex;justify-content:center;gap:8px;margin:22px auto}
-.reel{background:#eee;color:#111;border:3px solid #b18a35;border-radius:12px;width:90px;height:90px;display:grid;place-items:center;font-size:42px}
-button{background:#c99c36;color:#111;border:1px solid #e7bd55;border-radius:11px;padding:14px 22px;font-size:17px;font-weight:bold;margin:7px;cursor:pointer}
+body{
+ margin:0;background:radial-gradient(ellipse at top,#28231a,#090a0d 65%);
+ color:#fff;font-family:Arial,sans-serif;text-align:center;
+}
+header{padding:18px 8px 10px}
+h1{margin:5px;color:#eac45d;font-size:26px;letter-spacing:2px;text-shadow:0 0 15px #a77b26}
+.subtitle{color:#aaa;font-size:12px;letter-spacing:3px}
+.machine{
+ max-width:520px;margin:12px auto;padding:14px;
+ background:linear-gradient(145deg,#34302a,#101114 35%,#29251d);
+ border:3px solid #a77d30;border-radius:22px;
+ box-shadow:0 0 25px #000, inset 0 0 18px #000;
+}
+.topline{color:#eac45d;font-size:13px;letter-spacing:2px}
+.balance{
+ margin:12px auto;padding:12px;
+ background:#08090b;border:1px solid #98702c;
+ border-radius:12px;color:#f3ce69;font-size:20px;
+}
+.reels{
+ display:grid;grid-template-columns:repeat(5,1fr);
+ gap:5px;padding:9px;background:#050506;
+ border:3px solid #bd923c;border-radius:12px;
+ box-shadow:inset 0 0 20px #000;
+}
+.reel{
+ display:flex;flex-direction:column;gap:5px;
+ min-width:0;
+}
+.cell{
+ height:76px;background:linear-gradient(145deg,#e9e3d4,#9c927e);
+ border:2px solid #78602d;border-radius:7px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:clamp(25px,7vw,39px);
+ text-shadow:0 2px 3px #555;
+}
+.cell.center{background:linear-gradient(145deg,#fff2b9,#c59a3d);box-shadow:inset 0 0 12px #fff}
+.spinning .cell{animation:flash .13s infinite alternate}
+@keyframes flash{from{filter:brightness(.7)}to{filter:brightness(1.5)}}
+.info{color:#d7b45c;font-size:12px;margin:10px}
+.controls{padding:12px 5px}
+select{
+ background:#171717;color:#f3ce69;border:1px solid #b18a35;
+ border-radius:9px;padding:12px;font-size:17px;
+}
+button{
+ border:1px solid #f0d17a;border-radius:11px;
+ padding:14px 19px;background:linear-gradient(#f3d47b,#ad7923);
+ color:#17120a;font-size:16px;font-weight:bold;
+ cursor:pointer;box-shadow:0 4px 12px #000;
+}
+button:active{transform:scale(.96)}
 button:disabled{opacity:.4}
-#message{min-height:65px;color:#f4cf65;padding:15px;font-size:18px}
+.spinbtn{width:90%;font-size:20px;margin-top:12px}
+#message{min-height:52px;padding:12px;color:#f4d477;font-size:17px}
+.paytable{
+ max-width:520px;margin:15px auto;padding:14px;
+ background:#151619;border:1px solid #775b29;
+ border-radius:14px;color:#ccc;font-size:13px;line-height:2;
+}
+.gold{color:#eac45d}
+#bonus{
+ max-width:520px;margin:15px auto;padding:18px;
+ background:radial-gradient(ellipse,#383020,#101114 70%);
+ border:2px solid #d0a446;border-radius:18px;
+}
+#bonus h2{color:#f2d276}
+.hand{font-size:65px;animation:hand 1s infinite alternate}
+@keyframes hand{from{transform:translateY(-5px)}to{transform:translateY(8px)}}
+.rope{font-size:48px;margin:10px}
+.safes{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.safe{
+ width:85px;height:85px;padding:5px;
+ background:linear-gradient(145deg,#373737,#101010);
+ color:#f3ce69;border:2px solid #c49a43;font-size:34px;
+}
 .hidden{display:none}
-.safe{width:85px;height:85px;font-size:30px;background:#24262c;color:white}
-.rope{font-size:60px;margin:12px}
-footer{color:#777;font-size:12px;padding:20px}
+footer{color:#777;font-size:11px;padding:20px}
+@media(max-width:380px){
+ .cell{height:62px}
+ .machine{padding:8px}
+ .reels{gap:3px;padding:5px}
+}
 </style>
 </head>
 <body>
+
 <header>
 <h1>TAKHINSKY</h1>
-<h2>JUICY CUBE · GOLD VIP EDITION</h2>
+<div class="subtitle">JUICY CUBE · GOLD VIP EDITION</div>
 </header>
 
-<div class="panel coins">🪙 МОИ МОНЕТЫ: <b id="coins">1000</b></div>
+<div class="machine">
+<div class="topline">✦ ЗОЛОТОЙ ИГРОВОЙ АВТОМАТ ✦</div>
 
-<div class="panel">
-СТАВКА:
-<br><br>
+<div class="balance">
+🪙 МОИ МОНЕТЫ: <b id="coins">1000</b>
+</div>
+
+<div class="reels" id="reels">
+ <div class="reel"><div class="cell">🧊</div><div class="cell center">💎</div><div class="cell">🪙</div></div>
+ <div class="reel"><div class="cell">🎲</div><div class="cell center">🧊</div><div class="cell">💎</div></div>
+ <div class="reel"><div class="cell">🪙</div><div class="cell center">🎲</div><div class="cell">🧊</div></div>
+ <div class="reel"><div class="cell">💎</div><div class="cell center">🪙</div><div class="cell">🎲</div></div>
+ <div class="reel"><div class="cell">🧊</div><div class="cell center">💎</div><div class="cell">🪙</div></div>
+</div>
+
+<div class="info">ЛИНИЯ ВЫИГРЫША — СРЕДНИЙ РЯД</div>
+
+<div class="controls">
+<div class="gold">ВЫБЕРИ СТАВКУ</div><br><br>
 <select id="bet">
 <option value="10">10 монет</option>
 <option value="50">50 монет</option>
 <option value="100">100 монет</option>
 <option value="500">500 монет</option>
 <option value="1000">1000 монет</option>
-</select>
-<br><br>
-<button id="spin" onclick="spin()">КРУТИТЬ БАРАБАНЫ</button>
+</select><br>
+<button class="spinbtn" id="spin" onclick="spin()">▶ КРУТИТЬ БАРАБАНЫ</button>
 </div>
 
-<div class="reels">
-<div class="reel" id="r1">🧊</div>
-<div class="reel" id="r2">💎</div>
-<div class="reel" id="r3">🪙</div>
+<div id="message">Удачи! Запускай барабаны!</div>
 </div>
 
-<div id="message">Сделай ставку и испытай удачу!</div>
+<div class="paytable">
+<b class="gold">ТАБЛИЦА ВЫИГРЫШЕЙ</b><br>
+🧊 Три кубика — ставка × 3<br>
+💎 Три алмаза — ставка × 5<br>
+🪙 Три монеты — ставка × 4<br>
+🎲 Три игральных кубика — ставка × 7<br>
+🟨 Три золотых кубика — бонусный проход
+</div>
 
-<div id="bonus" class="panel hidden">
-<h2>🎁 БОНУСНЫЙ ПРОХОД</h2>
-<p>Дёрни за верёвку! Рука сверху бросит кубик.</p>
+<div id="bonus" class="hidden">
+<h2>✦ БОНУСНЫЙ ПРОХОД ✦</h2>
+<div class="hand">🖐️</div>
+<p>Рука сверху держит верёвку.<br>Дёрни её — и рука бросит кубик!</p>
 <div class="rope">🪢</div>
-<button onclick="pull()">ДЁРНУТЬ ЗА ВЕРЁВКУ</button>
-<p id="attempts"></p>
-<div id="safes"></div>
+<div class="gold" id="attempts">Попытки: 1</div>
+<br>
+<button id="pull" onclick="pullRope()">ДЁРНУТЬ ЗА ВЕРЁВКУ</button>
+<div id="bonusResult" style="padding:15px;color:#f4d477"></div>
+<div class="safes" id="safes"></div>
 </div>
 
-<button onclick="newGame()">НОВАЯ ИГРА</button>
-
-<footer>TAKHINSKY JUICY CUBE © 2026<br>Только виртуальные игровые монеты.</footer>
+<footer>
+TAKHINSKY JUICY CUBE © 2026<br>
+Только виртуальные игровые монеты. Не имеют денежной стоимости.
+</footer>
 
 <script>
 let coins=1000;
-let tries=0;
-let rescue=false;
-let bonusOpen=false;
-let bet=10;
-const symbols=["🧊","💎","🪙","🎲","⬛"];
+let busy=false;
+let bonusActive=false;
+let attempts=0;
+let rescueUsed=false;
+let currentBet=10;
 
-function update(){
+const symbols=["🧊","💎","🪙","🎲","🟨"];
+const names={
+ "🧊":"КУБИКИ",
+ "💎":"АЛМАЗЫ",
+ "🪙":"МОНЕТЫ",
+ "🎲":"ИГРАЛЬНЫЕ КУБИКИ",
+ "🟨":"ЗОЛОТЫЕ КУБИКИ"
+};
+
+function updateCoins(){
  document.getElementById("coins").textContent=coins;
 }
 
+function randomSymbol(){
+ return symbols[Math.floor(Math.random()*symbols.length)];
+}
+
+function drawReels(grid){
+ const reels=document.querySelectorAll(".reel");
+ reels.forEach((reel,c)=>{
+  reel.innerHTML="";
+  for(let r=0;r<3;r++){
+   let cell=document.createElement("div");
+   cell.className="cell"+(r===1?" center":"");
+   cell.textContent=grid[c][r];
+   reel.appendChild(cell);
+  }
+ });
+}
+
 function spin(){
- if(bonusOpen)return;
- bet=Number(document.getElementById("bet").value);
- if(coins<bet){
+ if(busy||bonusActive)return;
+ currentBet=Number(document.getElementById("bet").value);
+ if(coins<currentBet){
   document.getElementById("message").textContent="Недостаточно монет!";
   return;
  }
- coins-=bet;
- update();
+ coins-=currentBet;
+ updateCoins();
+ busy=true;
  document.getElementById("spin").disabled=true;
- let a=symbols[Math.floor(Math.random()*symbols.length)];
- let b=symbols[Math.floor(Math.random()*symbols.length)];
- let c=symbols[Math.floor(Math.random()*symbols.length)];
- document.getElementById("r1").textContent=a;
- document.getElementById("r2").textContent=b;
- document.getElementById("r3").textContent=c;
+ document.getElementById("message").textContent="Барабаны вращаются...";
 
- if(a===b&&b===c){
-  let win=bet*10;
-  coins+=win;
-  document.getElementById("message").textContent="💎 ДЖЕКПОТ! +" + win + " монет!";
-  update();
-  document.getElementById("spin").disabled=false;
- }else if(a===b||b===c||a===c){
-  let win=bet*2;
-  coins+=win;
-  document.getElementById("message").textContent="🧊 КОМБИНАЦИЯ! +" + win + " монет!";
-  update();
-  document.getElementById("spin").disabled=false;
- }else{
-  document.getElementById("message").textContent="🎁 Открылся бонусный проход!";
-  startBonus();
+ let reels=document.getElementById("reels");
+ reels.classList.add("spinning");
+ let grid=[];
+
+ for(let c=0;c<5;c++){
+  grid[c]=[];
+  for(let r=0;r<3;r++)grid[c][r]=randomSymbol();
  }
+
+ setTimeout(()=>{
+  reels.classList.remove("spinning");
+  drawReels(grid);
+  checkWin(grid);
+ },1100);
+}
+
+function checkWin(grid){
+ let row=grid.map(col=>col[1]);
+ let counts={};
+ row.forEach(s=>counts[s]=(counts[s]||0)+1);
+
+ let bonusCount=counts["🟨"]||0;
+ if(bonusCount>=3){
+  document.getElementById("message").textContent="🟨 ТРИ ЗОЛОТЫХ КУБИКА! БОНУС!";
+  busy=false;
+  startBonus();
+  return;
+ }
+
+ let best="";
+ let amount=0;
+ Object.keys(counts).forEach(s=>{
+  if(counts[s]>=3){
+   let multiplier={"🧊":3,"💎":5,"🪙":4,"🎲":7}[s]||0;
+   if(multiplier>amount){best=s;amount=multiplier;}
+  }
+ });
+
+ if(amount>0){
+  let win=currentBet*amount;
+  coins+=win;
+  updateCoins();
+  document.getElementById("message").textContent=
+   "🎉 "+names[best]+"! ВЫИГРЫШ "+win+" МОНЕТ!";
+ }else{
+  document.getElementById("message").textContent="Нет комбинации. Попробуй ещё раз!";
+ }
+ busy=false;
+ document.getElementById("spin").disabled=false;
 }
 
 function startBonus(){
- bonusOpen=true;
- tries=bet>=1000?7:bet>=500?5:bet>=100?3:bet>=50?2:1;
- rescue=false;
+ bonusActive=true;
+ rescueUsed=false;
+ attempts=currentBet>=1000?7:
+          currentBet>=500?5:
+          currentBet>=100?3:
+          currentBet>=50?2:1;
+
  document.getElementById("bonus").classList.remove("hidden");
- document.getElementById("attempts").textContent="Попыток: "+tries;
+ document.getElementById("bonusResult").textContent="";
  document.getElementById("safes").innerHTML="";
- document.getElementById("spin").disabled=true;
+ document.getElementById("attempts").textContent="Попыток: "+attempts;
+ document.getElementById("pull").disabled=false;
+ document.getElementById("bonus").scrollIntoView({behavior:"smooth"});
 }
 
-function pull(){
- if(tries<=0){
-  if(!rescue){
-   rescue=true;
-   tries=1;
-   document.getElementById("message").textContent="🤝 Последняя спасительная попытка!";
+function pullRope(){
+ if(!bonusActive)return;
+
+ if(attempts<=0){
+  if(!rescueUsed){
+   rescueUsed=true;
+   attempts=1;
+   document.getElementById("bonusResult").textContent=
+    "🤝 ОДНА СПАСИТЕЛЬНАЯ ПОПЫТКА!";
   }else{
-   finishBonus();
+   endBonus();
    return;
   }
  }
- document.getElementById("message").textContent="🖐️ Рука бросает кубик сверху!";
- let win=Math.random();
- let result="";
- if(win<0.35){
-  result="ПУСТО";
- }else if(win<0.65){
-  result="МАЛЕНЬКИЙ КУБИК";
- }else if(win<0.88){
-  result="БОЛЬШОЙ КУБИК";
- }else{
-  result="СУПЕРБОНУС";
- }
- let prize=0;
- if(result==="МАЛЕНЬКИЙ КУБИК")prize=bet*3;
- if(result==="БОЛЬШОЙ КУБИК")prize=bet*10;
- if(result==="СУПЕРБОНУС")prize=bet*25;
- coins+=prize;
- update();
+
+ document.getElementById("pull").disabled=true;
+ document.getElementById("bonusResult").textContent=
+  "🖐️ РУКА БРОСАЕТ КУБИК СВЕРХУ...";
+
+ setTimeout(()=>{
+  let result=Math.random();
+  let prize=0;
+  let text="⬛ ПУСТОЙ КУБИК!";
+
+  if(result>=0.40&&result<0.70){
+   prize=currentBet*3;
+   text="🧊 МАЛЕНЬКИЙ КУБИК!";
+  }else if(result>=0.70&&result<0.90){
+   prize=currentBet*10;
+   text="💎 БОЛЬШОЙ КУБИК!";
+  }else if(result>=0.90){
+   prize=currentBet*25;
+   text="🌟 СУПЕРБОНУС!";
+  }
+
+  attempts--;
+  coins+=prize;
+  updateCoins();
+
+  document.getElementById("bonusResult").textContent=
+   text+(prize?" +"+prize+" МОНЕТ":"");
+
+  let safe=document.createElement("button");
+  safe.className="safe";
+  safe.textContent=prize?"🧊":"⬛";
+  document.getElementById("safes").appendChild(safe);
+
+  if(prize>0){
+   endBonus();
+   return;
+  }
+
+  if(attempts>0){
+   document.getElementById("attempts").textContent="Осталось попыток: "+attempts;
+   document.getElementById("pull").disabled=false;
+  }else if(!rescueUsed){
+   document.getElementById("attempts").textContent="Осталась одна спасительная попытка!";
+   document.getElementById("pull").disabled=false;
+  }else{
+   endBonus();
+  }
+ },900);
+}
+
+function endBonus(){
+ bonusActive=false;
+ document.getElementById("pull").disabled=true;
+ document.getElementById("attempts").textContent="БОНУС ЗАВЕРШЁН";
  document.getElementById("message").textContent=
- result==="ПУСТО"?"⬛ Пустой кубик!": "🎉 "+result+"! +" + prize+" монет!";
- document.getElementById("attempts").textContent="Осталось попыток: "+Math.max(0,tries-1);
- tries--;
- if(prize>0){
-  finishBonus();
- }else if(tries<=0&&!rescue){
-  document.getElementById("message").textContent+=" Есть одна спасительная попытка!";
- }else if(tries<=0&&rescue){
-  finishBonus();
- }
-}
-
-function finishBonus(){
- bonusOpen=false;
- document.getElementById("bonus").classList.add("hidden");
+  "Бонусный проход завершён. Можно запускать барабаны!";
  document.getElementById("spin").disabled=false;
- document.getElementById("message").textContent+=" Бонус завершён. Можно играть дальше!";
-}
-
-function newGame(){
- if(bonusOpen){
-  document.getElementById("message").textContent="Сначала закончи бонус!";
-  return;
- }
- document.getElementById("message").textContent="Новая игра! Выбирай ставку.";
- document.getElementById("spin").disabled=false;
- document.getElementById("r1").textContent="🧊";
- document.getElementById("r2").textContent="💎";
- document.getElementById("r3").textContent="🪙";
 }
 </script>
 </body>
